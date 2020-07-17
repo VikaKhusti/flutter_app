@@ -29,6 +29,18 @@ class _MainScreenState extends State<MainScreen> {
         appBar: AppBar(
           title: Text('Test Task'),
           backgroundColor: Colors.black,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.autorenew),
+              iconSize: 40,
+              onPressed: () {
+                setState(() {
+                  _count = 0;
+                  newColor = Colors.grey[300];
+                });
+              },
+            ),
+          ],
         ),
         backgroundColor: newColor,
         body: InkWell(
@@ -43,7 +55,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: Text(
                     'Tap on sceen and see what happens...',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                     ),
                   ),
                 ),
@@ -58,13 +70,22 @@ class _MainScreenState extends State<MainScreen> {
                 new Container(
                   padding: EdgeInsets.only(top: 100),
                   child: Text(
-                    'You tapped $_count',
+                    'You tapped',
                     style: TextStyle(
                       fontSize: 20,
                     ),
                   ),
                 ),
-
+                new Container(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(
+                    '$_count',
+                    style: TextStyle(
+                      fontSize: _count.toDouble() + 15.0,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
               ],
           ),
           ),
