@@ -13,19 +13,12 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
-
-  List colors = [Colors.red, Colors.green, Colors.yellow];
-  Random random = new Random();
-
-  int index = 0;
-
-  void changeIndex() {
-    setState(() => index = random.nextInt(3));
-  }
-
+  var _count = 0;
+  
   Color newColor = Colors.grey[300];
   generateColor() {
     setState(() {
+      _count++;
       newColor = Colors.primaries[Random().nextInt(Colors.primaries.length)];
     });
   }
@@ -40,13 +33,40 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: newColor,
         body: InkWell(
           onTap: () => generateColor(),
-          child: Center(
-            child: Text(
-              'Hey there',
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
+          child: new Center(
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  padding: EdgeInsets.only(bottom: 100),
+                  child: Text(
+                    'Tap on sceen and see what happens...',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                new Container(
+                  child: Text(
+                    'Hey there',
+                     style: TextStyle(
+                     fontSize: 25, fontWeight: FontWeight.bold,
+                  ),
+                ),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(top: 100),
+                  child: Text(
+                    'You tapped $_count',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+
+              ],
+          ),
           ),
         ),
         );
