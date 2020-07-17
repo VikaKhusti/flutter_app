@@ -15,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
 
   //variable that means how much taps user made
   var _count = 0;
-  
+
   //default color
   Color newColor = Colors.grey[300];
   generateColor() {
@@ -24,6 +24,19 @@ class _MainScreenState extends State<MainScreen> {
       //randomly selected color
       newColor = Colors.primaries[Random().nextInt(Colors.primaries.length)];
     });
+
+    //here I try to predict BOTTOM OVERFLOWED exception
+    if (_count > 200){
+      resetValues();
+    }
+  }
+
+  //this is a method that reset values to default
+  resetValues(){
+      setState(() {
+        _count = 0;
+        newColor = Colors.grey[300];
+      });
   }
 
   @override
@@ -33,16 +46,11 @@ class _MainScreenState extends State<MainScreen> {
           title: Text('Test Task'),
           backgroundColor: Colors.black,
           actions: <Widget>[
-            //this is a button for reset states to default
+            //this is a button for reset values
             IconButton(
               icon: Icon(Icons.autorenew),
               iconSize: 40,
-              onPressed: () {
-                setState(() {
-                  _count = 0;
-                  newColor = Colors.grey[300];
-                });
-              },
+              onPressed: () => resetValues(),
             ),
           ],
         ),
@@ -85,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: Text(
                     '$_count',
                     style: TextStyle(
-                      fontSize: _count.toDouble() + 15.0, // the bigger value - the bigger fontSize
+                      fontSize: _count + 15.0, // the bigger value - the bigger fontSize
                       fontWeight: FontWeight.bold
                     ),
                   ),
